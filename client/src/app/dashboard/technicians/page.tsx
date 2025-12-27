@@ -14,10 +14,10 @@ export default function TechniciansPage() {
   // Check if user has access to technicians page
   if (!user || !permissions.canAccessTechnicians(user.role)) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-black">
+      <div className="flex min-h-screen items-center justify-center bg-neutral-950">
         <div className="text-center">
-          <h1 className="text-xl font-semibold text-white mb-2">Access Denied</h1>
-          <p className="text-[#666666]">You don't have permission to access technicians. Only technicians, managers, and administrators can access this page.</p>
+          <h1 className="text-xl font-semibold text-neutral-100 mb-2">Access Denied</h1>
+          <p className="text-neutral-400">You don't have permission to access technicians. Only technicians, managers, and administrators can access this page.</p>
         </div>
       </div>
     );
@@ -80,31 +80,31 @@ export default function TechniciansPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-white">Technicians</h1>
-          <p className="text-[#666666] text-sm mt-1">
+          <h1 className="text-3xl font-bold tracking-tight text-neutral-100">Technicians</h1>
+          <p className="text-neutral-400 text-sm mt-2">
             View and manage technician assignments
           </p>
         </div>
         {user && permissions.canManageTeams(user.role) && (
           <button 
             onClick={() => router.push('/dashboard/technicians/new')}
-            className="px-4 py-2 bg-white text-black text-sm font-medium rounded hover:bg-[#e0e0e0] transition-colors"
+            className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 text-white text-sm font-semibold rounded-lg hover:from-blue-500 hover:to-blue-400 transition-all duration-200 shadow-lg shadow-blue-900/30 hover:shadow-blue-900/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-neutral-900"
           >
-            New
+            + New Technician
           </button>
         )}
       </div>
 
       {/* Search Bar */}
-      <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg p-4">
+      <div className="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800/60 rounded-xl p-4 shadow-lg shadow-black/10">
         <div className="relative">
           <input
             type="text"
             placeholder="Search technicians..."
-            className="w-full px-4 py-2 pl-10 bg-black border border-[#1f1f1f] rounded-lg text-white placeholder-[#666666] focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all text-sm"
+            className="w-full px-4 py-2.5 pl-10 bg-neutral-950/80 border border-neutral-800 rounded-lg text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-sm"
           />
           <svg
-            className="absolute left-3 top-2.5 h-5 w-5 text-[#666666]"
+            className="absolute left-3 top-2.5 h-5 w-5 text-neutral-500"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -120,42 +120,42 @@ export default function TechniciansPage() {
       </div>
 
       {/* Technicians Table */}
-      <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg overflow-hidden">
+      <div className="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800/60 rounded-xl overflow-hidden shadow-xl shadow-black/20">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-black border-b border-[#1f1f1f]">
+            <thead className="bg-neutral-900/50 border-b border-neutral-800">
               <tr>
-                <th className="px-6 py-4 text-left text-xs font-medium text-[#a0a0a0] uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-500 uppercase tracking-wider">
                   Technician Name
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-[#a0a0a0] uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-500 uppercase tracking-wider">
                   Email
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-[#a0a0a0] uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-500 uppercase tracking-wider">
                   Team
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-[#a0a0a0] uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-500 uppercase tracking-wider">
                   Specialization
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-[#a0a0a0] uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-500 uppercase tracking-wider">
                   Status
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#1f1f1f]">
+            <tbody className="divide-y divide-neutral-800/50">
               {isLoading ? (
                 <tr>
                   <td colSpan={5} className="px-6 py-8 text-center">
                     <div className="flex items-center justify-center space-x-2">
-                      <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                      <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                      <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                      <div className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                      <div className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                      <div className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                     </div>
                   </td>
                 </tr>
               ) : technicians.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-[#666666] text-sm">
+                  <td colSpan={5} className="px-6 py-8 text-center text-neutral-400 text-sm">
                     No technicians found
                   </td>
                 </tr>
@@ -168,36 +168,36 @@ export default function TechniciansPage() {
                   return (
                     <tr
                       key={tech.id}
-                      className="hover:bg-black/50 transition-colors cursor-pointer"
+                      className="hover:bg-neutral-800/30 transition-all duration-200 cursor-pointer group"
                     >
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center space-x-3">
-                          <div className="w-8 h-8 rounded-full bg-[#1f1f1f] flex items-center justify-center text-white text-sm font-medium">
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600/20 to-blue-500/10 border border-blue-600/30 flex items-center justify-center text-neutral-100 text-sm font-semibold">
                             {techUser?.name?.charAt(0)?.toUpperCase() || 'T'}
                           </div>
-                          <span className="text-sm font-medium text-white">
+                          <span className="text-sm font-semibold text-neutral-100 group-hover:text-blue-400 transition-colors">
                             {techUser?.name || 'Unknown'}
                           </span>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-sm text-[#a0a0a0]">
+                        <span className="text-sm text-neutral-300">
                           {techUser?.email || 'N/A'}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-sm text-white">{getTeamName(tech.team_id)}</span>
+                        <span className="text-sm text-neutral-100 font-medium">{getTeamName(tech.team_id)}</span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-sm text-[#a0a0a0]">{getTeamSpecialization(tech.team_id)}</span>
+                        <span className="text-sm text-neutral-300">{getTeamSpecialization(tech.team_id)}</span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {tech.is_active ? (
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-[#22c55e]/10 text-[#22c55e] border border-[#22c55e]/20">
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-green-950/30 text-green-300 border border-green-800/60">
                             Active
                           </span>
                         ) : (
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-[#ef4444]/10 text-[#ef4444] border border-[#ef4444]/20">
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-red-950/30 text-red-300 border border-red-800/60">
                             Inactive
                           </span>
                         )}
@@ -212,49 +212,49 @@ export default function TechniciansPage() {
       </div>
 
       {/* Stats Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg p-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="bg-gradient-to-br from-neutral-900 to-neutral-900/80 border border-neutral-800/60 rounded-xl p-5 backdrop-blur-sm shadow-xl shadow-black/20 hover:shadow-2xl transition-all duration-300">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs text-[#666666] uppercase tracking-wider">Total Technicians</p>
-              <p className="text-2xl font-semibold text-white mt-1">
+              <p className="text-xs text-neutral-500 uppercase tracking-wider font-medium">Total Technicians</p>
+              <p className="text-3xl font-bold text-neutral-100 mt-2">
                 {technicians.length}
               </p>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-12 h-12 rounded-xl bg-neutral-800/50 flex items-center justify-center border border-neutral-700/50">
+              <svg className="w-6 h-6 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
             </div>
           </div>
         </div>
 
-        <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg p-4">
+        <div className="bg-gradient-to-br from-green-950/40 to-green-950/20 border border-green-800/60 rounded-xl p-5 backdrop-blur-sm shadow-xl shadow-green-950/20 hover:shadow-2xl transition-all duration-300">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs text-[#666666] uppercase tracking-wider">Active</p>
-              <p className="text-2xl font-semibold text-[#22c55e] mt-1">
+              <p className="text-xs text-neutral-500 uppercase tracking-wider font-medium">Active</p>
+              <p className="text-3xl font-bold text-green-400 mt-2">
                 {technicians.filter((t: any) => t.is_active).length}
               </p>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-[#22c55e]/10 flex items-center justify-center">
-              <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-12 h-12 rounded-xl bg-green-950/30 flex items-center justify-center border border-green-800/50">
+              <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
           </div>
         </div>
 
-        <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg p-4">
+        <div className="bg-gradient-to-br from-red-950/40 to-red-950/20 border border-red-800/60 rounded-xl p-5 backdrop-blur-sm shadow-xl shadow-red-950/20 hover:shadow-2xl transition-all duration-300">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs text-[#666666] uppercase tracking-wider">Inactive</p>
-              <p className="text-2xl font-semibold text-[#ef4444] mt-1">
+              <p className="text-xs text-neutral-500 uppercase tracking-wider font-medium">Inactive</p>
+              <p className="text-3xl font-bold text-red-400 mt-2">
                 {technicians.filter((t: any) => !t.is_active).length}
               </p>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-[#ef4444]/10 flex items-center justify-center">
-              <svg className="w-5 h-5 text-[#ef4444]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-12 h-12 rounded-xl bg-red-950/30 flex items-center justify-center border border-red-800/50">
+              <svg className="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>

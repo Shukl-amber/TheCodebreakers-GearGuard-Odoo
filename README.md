@@ -39,28 +39,28 @@ GearGuard follows a modern three-tier architecture with clear separation of conc
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                   Client (Next.js 16)                    │
-│  - React 19 with Server Components                       │
-│  - TanStack Query for data fetching                      │
-│  - Zustand for authentication state                      │
-│  - Tailwind CSS for styling                              │
+│                   Client (Next.js 16)                   │
+│  - React 19 with Server Components                      │
+│  - TanStack Query for data fetching                     │
+│  - Zustand for authentication state                     │
+│  - Tailwind CSS for styling                             │
 └─────────────────┬───────────────────────────────────────┘
                   │ HTTP/REST API
                   │ JSON over HTTPS
 ┌─────────────────▼───────────────────────────────────────┐
-│              API Layer (FastAPI)                         │
-│  - RESTful API with OpenAPI documentation                │
-│  - JWT-based authentication                              │
-│  - Pydantic validation                                   │
-│  - SQLAlchemy ORM                                        │
+│              API Layer (FastAPI)                        │
+│  - RESTful API with OpenAPI documentation               │
+│  - JWT-based authentication                             │
+│  - Pydantic validation                                  │
+│  - SQLAlchemy ORM                                       │
 └─────────────────┬───────────────────────────────────────┘
                   │ SQL Queries
                   │ Connection Pool
 ┌─────────────────▼───────────────────────────────────────┐
-│           Database (PostgreSQL 16)                       │
-│  - ACID compliance                                       │
-│  - UUID primary keys                                     │
-│  - Enum types for data integrity                         │
+│           Database (PostgreSQL 16)                      │
+│  - ACID compliance                                      │
+│  - UUID primary keys                                    │
+│  - Enum types for data integrity                        │
 │  - Referential integrity with foreign keys              │
 └─────────────────────────────────────────────────────────┘
 ```
@@ -81,7 +81,7 @@ GearGuard follows a modern three-tier architecture with clear separation of conc
 
 ### Backend
 
-**FastAPI (Python 3.11)**
+**FastAPI (Python 3.13)**
 - Choice Reasoning: FastAPI provides automatic OpenAPI documentation, native async support, and excellent performance through Starlette and Pydantic. Its automatic validation reduces boilerplate code significantly.
 - Version: 0.115.0
 
@@ -604,12 +604,12 @@ api:
 Docker Compose creates a bridge network automatically:
 
 ```
-┌─────────────────────────────────────┐
-│     Docker Bridge Network           │
-│                                     │
-│  ┌──────────┐    ┌──────────┐     │
-│  │ db:5432  │◄───┤ api:8000 │     │
-│  └────▲─────┘    └─────▲────┘     │
+┌────────────────────────────────────┐
+│     Docker Bridge Network          │
+│                                    │
+│  ┌──────────┐    ┌──────────┐      │
+│  │ db:5432  │◄───┤ api:8000 │      │
+│  └────▲─────┘    └─────▲────┘      │
 └───────┼──────────────────┼─────────┘
         │                  │
     localhost:5432    localhost:8000

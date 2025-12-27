@@ -5,6 +5,11 @@ import { useRouter } from 'next/navigation';
 import { apiClient } from '@/lib/api';
 import { auth } from '@/lib/auth';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Input } from '@/components/ui/Input';
+import { Select } from '@/components/ui/Select';
+import { Button } from '@/components/ui/Button';
+import { Alert } from '@/components/ui/Alert';
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -54,134 +59,101 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4">
+    <div className="min-h-screen bg-neutral-950 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Logo/Brand */}
-        <div className="text-center mb-12">
-          <h1 className="text-2xl font-semibold text-white tracking-tight mb-2">
-            GearGuard
-          </h1>
-          <p className="text-[#666666] text-sm">Create your account</p>
+        <div className="text-center mb-8">
+          <div className="mb-4 flex justify-center">
+            <Image src="/logo.png" alt="GearGuard" width={120} height={120} className="w-32" />
+          </div>
+          <h1 className="text-2xl font-semibold text-neutral-100 mb-2">Create your account</h1>
+          <p className="text-sm text-neutral-400">Join GearGuard today</p>
         </div>
 
-        {/* Register Form Card */}
-        <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg p-8">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-8 shadow-xl">
           {error && (
-            <div className="mb-6 p-3 bg-[#141414] border border-[#ef4444] rounded text-[#ef4444] text-sm">
-              {error}
+            <div className="mb-6">
+              <Alert variant="error" onClose={() => setError('')}>
+                {error}
+              </Alert>
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Name Field */}
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-[#a0a0a0] mb-2">
-                Full name
-              </label>
-              <input
-                id="name"
-                type="text"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                required
-                className="w-full px-4 py-3 bg-black border border-[#1f1f1f] rounded text-white placeholder-[#666666] focus:outline-none focus:border-white transition-colors"
-                placeholder="John Doe"
-                disabled={isLoading}
-              />
-            </div>
-
-            {/* Email Field */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-[#a0a0a0] mb-2">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                required
-                className="w-full px-4 py-3 bg-black border border-[#1f1f1f] rounded text-white placeholder-[#666666] focus:outline-none focus:border-white transition-colors"
-                placeholder="you@example.com"
-                disabled={isLoading}
-              />
-            </div>
-
-            {/* Password Field */}
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-[#a0a0a0] mb-2">
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                required
-                className="w-full px-4 py-3 bg-black border border-[#1f1f1f] rounded text-white placeholder-[#666666] focus:outline-none focus:border-white transition-colors"
-                placeholder="••••••••"
-                disabled={isLoading}
-              />
-            </div>
-
-            {/* Confirm Password Field */}
-            <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-[#a0a0a0] mb-2">
-                Confirm password
-              </label>
-              <input
-                id="confirmPassword"
-                type="password"
-                value={formData.confirmPassword}
-                onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                required
-                className="w-full px-4 py-3 bg-black border border-[#1f1f1f] rounded text-white placeholder-[#666666] focus:outline-none focus:border-white transition-colors"
-                placeholder="••••••••"
-                disabled={isLoading}
-              />
-            </div>
-
-            {/* Role Selection Field */}
-            <div>
-              <label htmlFor="role" className="block text-sm font-medium text-[#a0a0a0] mb-2">
-                User Type
-              </label>
-              <select
-                id="role"
-                value={formData.role}
-                onChange={(e) => setFormData({ ...formData, role: e.target.value as any })}
-                required
-                className="w-full px-4 py-3 bg-black border border-[#1f1f1f] rounded text-white focus:outline-none focus:border-white transition-colors"
-                disabled={isLoading}
-              >
-                <option value="user">User</option>
-                <option value="technician">Technician</option>
-                <option value="manager">Manager</option>
-                <option value="admin">Administrator</option>
-              </select>
-              <p className="mt-1 text-xs text-[#666666]">
-                Select the type of user you are registering as
-              </p>
-            </div>
-
-            {/* Sign Up Button */}
-            <button
-              type="submit"
+            <Input
+              id="name"
+              type="text"
+              label="Full name"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              placeholder="John Doe"
+              required
               disabled={isLoading}
-              className="w-full bg-white text-black py-3 px-4 rounded font-medium hover:bg-[#e0e0e0] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            />
+
+            <Input
+              id="email"
+              type="email"
+              label="Email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              placeholder="you@example.com"
+              required
+              disabled={isLoading}
+            />
+
+            <Input
+              id="password"
+              type="password"
+              label="Password"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              placeholder="••••••••"
+              required
+              disabled={isLoading}
+              helperText="Must be at least 6 characters"
+            />
+
+            <Input
+              id="confirmPassword"
+              type="password"
+              label="Confirm password"
+              value={formData.confirmPassword}
+              onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+              placeholder="••••••••"
+              required
+              disabled={isLoading}
+            />
+
+            <Select
+              id="role"
+              label="User Type"
+              value={formData.role}
+              onChange={(e) => setFormData({ ...formData, role: e.target.value as any })}
+              options={[
+                { value: 'user', label: 'User' },
+                { value: 'technician', label: 'Technician' },
+                { value: 'manager', label: 'Manager' },
+                { value: 'admin', label: 'Administrator' },
+              ]}
+              required
+              disabled={isLoading}
+              helperText="Select the type of user you are registering as"
+            />
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              isLoading={isLoading}
+              className="w-full"
             >
-              {isLoading ? 'Creating account...' : 'Create account'}
-            </button>
+              Create account
+            </Button>
           </form>
 
-          {/* Footer Link */}
           <div className="mt-6 text-center text-sm">
-            <span className="text-[#666666]">Already have an account?</span>
-            {' '}
-            <Link 
-              href="/login" 
-              className="text-white hover:text-[#a0a0a0] transition-colors font-medium"
-            >
+            <span className="text-neutral-500">Already have an account? </span>
+            <Link href="/login" className="text-blue-400 hover:text-blue-300 font-medium transition-colors">
               Sign in
             </Link>
           </div>

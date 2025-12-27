@@ -176,17 +176,17 @@ export default function KanbanPage() {
   };
 
   return (
-    <div className="p-6 bg-zinc-900 min-h-screen">
+    <div className="space-y-6">
       {/* Page Header */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-semibold text-zinc-100">Maintenance Kanban Board</h1>
-        <p className="text-sm text-zinc-400 mt-1">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight text-neutral-100">Maintenance Kanban Board</h1>
+        <p className="text-sm text-neutral-400 mt-2">
           Visualize and manage maintenance requests through their lifecycle
         </p>
       </div>
 
       {/* Kanban Board */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {COLUMNS.map((column) => {
           const cards = groupedRequests[column.stage];
           const count = cards.length;
@@ -194,17 +194,17 @@ export default function KanbanPage() {
           return (
             <div
               key={column.stage}
-              className="border border-zinc-800 rounded-lg flex flex-col"
+              className="border border-neutral-800/60 rounded-xl flex flex-col bg-neutral-900/50 backdrop-blur-sm shadow-xl shadow-black/20"
               onDragOver={handleDragOver}
               onDrop={() => handleDrop(column.stage)}
             >
               {/* Column Header */}
-              <div className="p-4 border-b border-zinc-800">
+              <div className="p-5 border-b border-neutral-800/50 bg-neutral-900/50">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-sm font-medium text-zinc-100 uppercase tracking-wide">
+                  <h2 className="text-sm font-semibold text-neutral-100 uppercase tracking-wide">
                     {column.label}
                   </h2>
-                  <span className="text-xs text-zinc-400 bg-zinc-800 px-2 py-1 rounded">
+                  <span className="text-xs font-semibold text-neutral-300 bg-neutral-800/60 px-2.5 py-1 rounded-lg border border-neutral-700/50">
                     {count}
                   </span>
                 </div>
@@ -213,11 +213,11 @@ export default function KanbanPage() {
               {/* Column Body - Scrollable */}
               <div className="p-4 space-y-3 overflow-y-auto max-h-[calc(100vh-250px)]">
                 {isLoading ? (
-                  <div className="text-center py-8 text-zinc-500 text-sm">
+                  <div className="text-center py-8 text-neutral-500 text-sm">
                     Loading...
                   </div>
                 ) : cards.length === 0 ? (
-                  <div className="text-center py-8 text-zinc-500 text-sm">
+                  <div className="text-center py-8 text-neutral-500 text-sm">
                     No requests in this stage
                   </div>
                 ) : (
@@ -229,11 +229,11 @@ export default function KanbanPage() {
                       onDragEnd={handleDragEnd}
                       onClick={() => handleCardClick(card.id)}
                       className={`
-                        bg-zinc-800 border rounded-lg p-4 cursor-pointer
-                        transition-all hover:bg-zinc-700 hover:border-zinc-600
-                        ${card.overdue ? 'border-red-600 border-2' : 'border-zinc-700'}
+                        bg-neutral-800/80 border rounded-xl p-4 cursor-pointer
+                        transition-all duration-200 hover:bg-neutral-700/80 hover:border-neutral-600 hover:shadow-lg hover:scale-[1.02]
+                        ${card.overdue ? 'border-red-600 border-2 shadow-lg shadow-red-950/30' : 'border-neutral-700/60'}
                         ${draggedCard?.id === card.id ? 'opacity-50' : ''}
-                        ${user?.role !== 'user' ? 'hover:shadow-lg' : ''}
+                        ${user?.role !== 'user' ? 'hover:shadow-xl' : ''}
                       `}
                     >
                       {/* Overdue Indicator */}
@@ -255,19 +255,19 @@ export default function KanbanPage() {
                       )}
 
                       {/* Subject */}
-                      <h3 className="text-sm font-medium text-zinc-100 mb-2 line-clamp-2">
+                      <h3 className="text-sm font-medium text-neutral-100 mb-2 line-clamp-2">
                         {card.subject}
                       </h3>
 
                       {/* Equipment Name */}
-                      <div className="text-xs text-zinc-400 mb-2">
+                      <div className="text-xs text-neutral-400 mb-2">
                         <span className="font-medium">Equipment:</span> {card.equipment_name}
                       </div>
 
                       {/* Assigned Technician */}
-                      <div className="text-xs text-zinc-400 mb-3">
+                      <div className="text-xs text-neutral-400 mb-3">
                         <span className="font-medium">Assigned to:</span>{' '}
-                        <span className={card.assigned_to ? 'text-zinc-300' : 'text-zinc-500 italic'}>
+                        <span className={card.assigned_to ? 'text-neutral-300' : 'text-neutral-500 italic'}>
                           {card.assigned_to_name || 'Unassigned'}
                         </span>
                       </div>
@@ -275,7 +275,7 @@ export default function KanbanPage() {
                       {/* Stage Badge */}
                       <div className="flex items-center justify-between">
                         <StatusBadge stage={card.stage} />
-                        <span className="text-xs text-zinc-500">
+                        <span className="text-xs text-neutral-500">
                           {new Date(card.created_at).toLocaleDateString()}
                         </span>
                       </div>
@@ -290,16 +290,16 @@ export default function KanbanPage() {
 
       {/* Role Info - Debug Helper */}
       {user && (
-        <div className="mt-6 p-4 bg-zinc-900 border border-zinc-800 rounded-lg text-xs text-zinc-400">
-          <span className="font-medium text-zinc-300">Your Role:</span> {user.role}
+        <div className="p-4 bg-neutral-900/50 backdrop-blur-sm border border-neutral-800/60 rounded-xl text-xs text-neutral-400 shadow-lg shadow-black/10">
+          <span className="font-semibold text-neutral-300">Your Role:</span> {user.role}
           {user.role === 'user' && (
-            <span className="ml-2 text-amber-400">(Read-only view)</span>
+            <span className="ml-2 text-amber-400 font-medium">(Read-only view)</span>
           )}
           {user.role === 'technician' && (
-            <span className="ml-2 text-amber-400">(Can move: New → In Progress → Repaired)</span>
+            <span className="ml-2 text-amber-400 font-medium">(Can move: New → In Progress → Repaired)</span>
           )}
           {(user.role === 'manager' || user.role === 'admin') && (
-            <span className="ml-2 text-emerald-400">(Can move to any stage)</span>
+            <span className="ml-2 text-green-400 font-medium">(Can move to any stage)</span>
           )}
         </div>
       )}
