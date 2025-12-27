@@ -1,25 +1,25 @@
 import { MaintenanceRequest } from '@/lib/dummyData';
+import { Badge } from '@/components/ui/Badge';
 
-function stageStyles(stage: MaintenanceRequest['stage']): string {
-  // Theme mapping per theme.txt
+function getStageVariant(stage: MaintenanceRequest['stage']): 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'neutral' {
   switch (stage) {
     case 'new':
-      return 'bg-zinc-800 text-zinc-100 border border-zinc-700';
+      return 'primary';
     case 'in_progress':
-      return 'bg-amber-900/30 text-amber-200 border border-amber-700/50';
+      return 'warning';
     case 'repaired':
-      return 'bg-emerald-900/30 text-emerald-200 border border-emerald-700/50';
+      return 'success';
     case 'scrap':
-      return 'bg-zinc-900 text-zinc-400 border border-zinc-700';
+      return 'neutral';
     default:
-      return 'bg-zinc-800 text-zinc-100 border border-zinc-700';
+      return 'neutral';
   }
 }
 
 export default function StatusBadge({ stage }: { stage: MaintenanceRequest['stage'] }) {
   return (
-    <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium ${stageStyles(stage)}`}>
+    <Badge variant={getStageVariant(stage)} size="sm">
       {stage.replace('_', ' ')}
-    </span>
+    </Badge>
   );
 }
