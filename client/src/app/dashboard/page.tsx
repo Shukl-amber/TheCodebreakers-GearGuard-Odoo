@@ -71,10 +71,10 @@ export default async function DashboardPage() {
 
       {/* KPI Cards */}
       <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
-        <StatCard label="Total Equipment" value={totalActiveEquipment} tone="neutral" icon="📦" />
-        <StatCard label="Open Maintenance Requests" value={openRequests} tone="warning" icon="🔧" />
-        <StatCard label="Overdue Requests" value={overdueRequests} tone="error" icon="⚠️" />
-        <StatCard label="Preventive Scheduled" value={preventiveScheduled} tone="primary" icon="📅" />
+        <StatCard label="Total Equipment" value={totalActiveEquipment} tone="neutral" />
+        <StatCard label="Open Maintenance Requests" value={openRequests} tone="warning" />
+        <StatCard label="Overdue Requests" value={overdueRequests} tone="error" />
+        <StatCard label="Preventive Scheduled" value={preventiveScheduled} tone="primary" />
       </section>
 
       {/* Recent Maintenance Activity */}
@@ -135,12 +135,10 @@ function StatCard({
   label,
   value,
   tone = 'neutral',
-  icon,
 }: {
   label: string;
   value: number;
   tone?: 'neutral' | 'warning' | 'error' | 'primary';
-  icon?: string;
 }) {
   const tones: Record<string, { bg: string; border: string; text: string; shadow: string }> = {
     neutral: { 
@@ -171,10 +169,7 @@ function StatCard({
   const t = tones[tone];
   return (
     <div className={`rounded-xl border ${t.border} ${t.bg} p-5 backdrop-blur-sm shadow-xl ${t.shadow} hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]`}> 
-      <div className="flex items-start justify-between mb-3">
-        <div className="text-sm font-medium text-neutral-400">{label}</div>
-        {icon && <span className="text-2xl">{icon}</span>}
-      </div>
+      <div className="text-sm font-medium text-neutral-400 mb-3">{label}</div>
       <div className={`text-4xl font-bold ${t.text}`}>{value}</div>
     </div>
   );
