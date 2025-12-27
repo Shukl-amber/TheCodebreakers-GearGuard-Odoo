@@ -69,10 +69,10 @@ docker-compose exec db psql -U gearguard -d gearguard_db
 
 ## Database Persistence
 
-The PostgreSQL data is stored in a local directory `postgres_data/` that is bind-mounted to the container. This ensures your database persists across container restarts. The data will only be deleted if you:
+The PostgreSQL data is stored in a Docker named volume `postgres_data`. This ensures your database persists across container restarts and avoids permission issues on Windows/WSL. The data will only be deleted if you:
 
-1. Manually delete the `postgres_data/` directory, or
-2. Run `docker compose down -v` (which removes volumes)
+1. Run `docker compose down -v` (which removes volumes)
+2. Manually remove the Docker volume using `docker volume rm <volume_name>`
 
 ## Development
 
